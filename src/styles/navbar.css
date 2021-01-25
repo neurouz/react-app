@@ -1,4 +1,36 @@
-.accounts-parent {
+.navbar-buttons-right {
   display: flex;
   flex-direction: row;
+}
+
+.nav-link {
+  text-align: center;
+  color: white !important;
+  margin-right: 25px;
+}
+
+.navbar-leftside {
+  font-size: large;
+}
+
+.logo-image {
+  margin-right: 70px;
+}
+
+.navbar-buttons-right {
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-list {
+  justify-items: center;
+  align-items: center;
+}
+
+.nav-item {
+  transition: all 0.25s;
+}
+
+.nav-item:hover {
+  font-weight: bold;
 }
