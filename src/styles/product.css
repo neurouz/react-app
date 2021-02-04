@@ -45,6 +45,7 @@
   -webkit-transform-origin: 100% 0;
   -ms-transform-origin: 100% 0;
   transform-origin: 100% 0;
+  cursor: pointer;
 }
 .snip1418 .add-to-cart i {
   display: inline-block;

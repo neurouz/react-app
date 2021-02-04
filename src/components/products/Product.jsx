@@ -10,6 +10,9 @@ export default class Product extends Component {
       data: props.product,
     };
   }
+  handleClick = (id) => {
+    console.log(id);
+  };
   render() {
     return (
       <div className="product-card">
@@ -19,8 +22,11 @@ export default class Product extends Component {
             alt="product"
             height="200"
           />
-          <div className="add-to-cart">
-            {" "}
+          <div
+            onClick={() => this.handleClick(this.props.id)}
+            id={this.props.id}
+            className="add-to-cart"
+          >
             <i className="ion-android-add"></i>
             <span>Add to Cart</span>
           </div>
@@ -33,14 +39,6 @@ export default class Product extends Component {
               {this.state.data.price}
             </div>
           </figcaption>
-          <a href="/"> </a>
-        </figure>
-        <figure className="snip1418 hover">
-          <div className="add-to-cart">
-            {" "}
-            <i className="ion-android-add"></i>
-            <span>Add to Cart</span>
-          </div>
         </figure>
       </div>
     );

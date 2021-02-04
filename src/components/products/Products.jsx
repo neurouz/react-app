@@ -10,7 +10,6 @@ import React, { Component } from "react";
 export default class Products extends Component {
   constructor(props) {
     super(props);
-    this.APIService = new APIService();
     this.state = {
       data: [],
       isLoaded: false,
@@ -18,7 +17,7 @@ export default class Products extends Component {
   }
 
   componentDidMount() {
-    this.APIService.GetAsync("Product").then((response) => {
+    APIService.GetAsync("Product").then((response) => {
       this.setState({
         data: response.data,
         isLoaded: true,
@@ -39,7 +38,11 @@ export default class Products extends Component {
           </h1>
           <div className="products-all">
             {data.map((product) => (
-              <Product key={product.id} product={product}></Product>
+              <Product
+                id={product.id}
+                key={product.id}
+                product={product}
+              ></Product>
             ))}
           </div>
         </div>

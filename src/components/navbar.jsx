@@ -6,6 +6,16 @@ import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
 export default class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: props.auth,
+    };
+  }
+  handleLogout = (e) => {
+    localStorage.removeItem("etoolservice_api_key");
+    localStorage.removeItem("etoolservice_user_data");
+  };
   render() {
     return (
       <div className="navbar-parent">
@@ -60,12 +70,22 @@ export default class Navbar extends Component {
                   Register
                 </button>
               </Link>
-              <button
-                className="btn btn-outline-light my-2 my-sm-0"
-                type="submit"
-              >
-                Log in
-              </button>
+              {!this.state.auth && (
+                <Link
+                  to="/login"
+                  className="btn btn-outline-light my-2 my-sm-0"
+                  type="submit"
+                >
+                  Log in
+                </Link>
+              )}
+
+              {this.state.auth && (
+                <button onClick={this.handleLogout} className="btn btn-danger">
+                  {" "}
+                  Logout{" "}
+                </button>
+              )}
             </div>
           </div>
         </nav>
