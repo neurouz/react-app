@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import APIService from "../../services/apiService";
 import LocalStorageService from "../../services/LocalStorageService";
+import { useLocation } from "react-router-dom";
 
 // Other scripts
 import toastr from "toastr";
@@ -13,6 +14,7 @@ import "../../styles/loginForm.css";
 
 export default function Login(props) {
   const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
+  const location = useLocation();
 
   const loginSubmit = async (data) => {
     try {
@@ -20,14 +22,15 @@ export default function Login(props) {
       if (result.status === 200) {
         LocalStorageService.SetJsonData(result.data);
         const apiKey = btoa(data.username + ":" + data.password);
-        props.Authenticate(true, apiKey);
         localStorage.setItem("etoolservice_api_key", apiKey);
+        location.auth();
+        toastr.success("Login sucessful", "Info");
       } else {
         toastr.error("Username or password are incorrect", "Error");
       }
-      console.log(APIService.User);
     } catch (e) {
       toastr.error("Please check your network connection", "Error");
+      console.log(e);
     }
   };
 

@@ -12,10 +12,24 @@ export default class Navbar extends Component {
       auth: props.auth,
     };
   }
+
   handleLogout = (e) => {
+    this.props.Authenticate(false);
     localStorage.removeItem("etoolservice_api_key");
     localStorage.removeItem("etoolservice_user_data");
+    this.setState({
+      auth: false,
+    });
   };
+
+  handleLogin = (e) => {
+    if (localStorage.getItem("etoolservice_api_key")) {
+      this.setState({
+        auth: true,
+      });
+    }
+  };
+
   render() {
     return (
       <div className="navbar-parent">
@@ -53,6 +67,13 @@ export default class Navbar extends Component {
                   Products
                 </Link>
               </li>
+              {this.state.auth && (
+                <li className="nav-item">
+                  <a className="nav-link" href="/">
+                    My services
+                  </a>
+                </li>
+              )}
               <li className="nav-item">
                 <a className="nav-link" href="/">
                   Services
@@ -72,7 +93,10 @@ export default class Navbar extends Component {
               </Link>
               {!this.state.auth && (
                 <Link
-                  to="/login"
+                  to={{
+                    pathname: "/login",
+                    auth: this.handleLogin,
+                  }}
                   className="btn btn-outline-light my-2 my-sm-0"
                   type="submit"
                 >

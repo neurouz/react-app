@@ -39,7 +39,10 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navbar auth={this.state.authenticated} />
+          <Navbar
+            Authenticate={this.Authenticate}
+            auth={this.state.authenticated}
+          />
           {message}
           <Switch>
             <Route path="/products" component={Products}></Route>
