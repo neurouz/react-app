@@ -41,3 +41,12 @@
   top: 0;
   z-index: 1;
 }
+
+.cog-btn {
+  margin-right: 10px;
+  border: none !important;
+}
+.cog-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}

@@ -20,17 +20,22 @@ export default class Navbar extends Component {
     this.setState({
       auth: false,
     });
+    this.props.Authenticate(false, null);
   };
 
   handleLogin = (e) => {
-    if (localStorage.getItem("etoolservice_api_key")) {
+    var api_key = localStorage.getItem("etoolservice_api_key");
+    if (api_key) {
       this.setState({
         auth: true,
       });
     }
+    this.props.Authenticate(true, api_key);
   };
 
   render() {
+    if (this.state.auth) {
+    }
     return (
       <div className="navbar-parent">
         <nav className="navbar navbar-expand-lg navbar-light bg-primary">
@@ -86,29 +91,50 @@ export default class Navbar extends Component {
               </li>
             </ul>
             <div className="navbar-buttons-right">
-              <Link to="/register">
-                <button className="btn btn-primary my-2 my-sm-0" type="submit">
-                  Register
-                </button>
-              </Link>
               {!this.state.auth && (
-                <Link
-                  to={{
-                    pathname: "/login",
-                    auth: this.handleLogin,
-                  }}
-                  className="btn btn-outline-light my-2 my-sm-0"
-                  type="submit"
-                >
-                  Log in
-                </Link>
+                <div>
+                  <Link to="/register">
+                    <button
+                      className="btn btn-primary my-2 my-sm-0"
+                      type="submit"
+                    >
+                      Register
+                    </button>
+                  </Link>
+                  <Link
+                    to={{
+                      pathname: "/login",
+                      auth: this.handleLogin,
+                    }}
+                    className="btn btn-outline-light my-2 my-sm-0"
+                    type="submit"
+                  >
+                    Log in
+                  </Link>
+                </div>
               )}
 
               {this.state.auth && (
-                <button onClick={this.handleLogout} className="btn btn-danger">
-                  {" "}
-                  Logout{" "}
-                </button>
+                <div>
+                  <Link
+                    to={{
+                      pathname: "/cart",
+                      auth: this.props.auth,
+                    }}
+                    className="btn btn-outline-light my-2 my-sm-0 cog-btn"
+                  >
+                    <i className="fa fa-shopping-cart"></i>
+                  </Link>
+                  <button className="btn btn-outline-light my-2 my-sm-0 cog-btn">
+                    <i className="fa fa-cog"></i>
+                  </button>
+                  <button
+                    onClick={this.handleLogout}
+                    className="btn btn-danger"
+                  >
+                    Logout
+                  </button>
+                </div>
               )}
             </div>
           </div>

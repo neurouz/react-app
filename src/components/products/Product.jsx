@@ -1,7 +1,10 @@
 import "../../styles/product.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "toastr/build/toastr.min.css";
 
+import toastr from "toastr";
 import React, { Component } from "react";
+import CartService from "../../services/cartService";
 
 export default class Product extends Component {
   constructor(props) {
@@ -11,7 +14,8 @@ export default class Product extends Component {
     };
   }
   handleClick = (id) => {
-    console.log(id);
+    CartService.AddToCart(this.state.data, 1);
+    toastr.info("Added to cart", "Info");
   };
   render() {
     return (

@@ -6,9 +6,7 @@ import Navbar from "./components/navbar";
 import Products from "./components/products/Products";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register";
-
-// Import services
-import LocalStorageService from "./services/LocalStorageService";
+import Cart from "./components/cart/cart";
 
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -32,10 +30,10 @@ class App extends Component {
   };
 
   render() {
-    var message = "";
-    if (this.state.authenticated === true || this.state.apiKey) {
-      message = "Hello, " + LocalStorageService.GetJsonData().username;
-    }
+    // var message = "";
+    // if (this.state.authenticated === true || this.state.apiKey) {
+    //   message = "Hello, " + LocalStorageService.GetJsonData().username;
+    // }
     return (
       <Router>
         <div>
@@ -43,13 +41,16 @@ class App extends Component {
             Authenticate={this.Authenticate}
             auth={this.state.authenticated}
           />
-          {message}
           <Switch>
             <Route path="/products" component={Products}></Route>
             <Route path="/register" component={Register}></Route>
             <Route
               path="/login"
               render={() => <Login Authenticate={this.Authenticate} />}
+            ></Route>
+            <Route
+              path="/cart"
+              render={() => <Cart auth={this.state.authenticated}></Cart>}
             ></Route>
           </Switch>
         </div>
