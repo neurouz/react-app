@@ -17,6 +17,8 @@
   transform: translateZ(0);
   -webkit-perspective: 20em;
   perspective: 20em;
+  display: flex;
+  flex-direction: column;
 }
 .snip1418 * {
   -webkit-box-sizing: border-box;
@@ -28,6 +30,7 @@
   max-width: 100%;
   vertical-align: top;
   position: relative;
+  margin: auto;
 }
 .snip1418 .add-to-cart {
   position: absolute;
