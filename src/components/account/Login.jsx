@@ -20,7 +20,12 @@ export default function Login(props) {
     try {
       const result = await APIService.LoginAsync(data);
       if (result.status === 200) {
-        LocalStorageService.SetJsonData(result.data);
+        var userObject = result.data;
+        const customer = await APIService.GetAsync(
+          `Customer/GetByAccountId/${result.data.id}`
+        );
+        userObject.customerId = customer.data.id;
+        LocalStorageService.SetJsonData(userObject);
         const apiKey = btoa(data.username + ":" + data.password);
         localStorage.setItem("etoolservice_api_key", apiKey);
         location.auth();

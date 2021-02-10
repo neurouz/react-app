@@ -34,4 +34,11 @@ export default class APIService {
       headers: auth,
     });
   }
+
+  static async PostWithAuthAsync(url, data, apiKey) {
+    const auth = {
+      Authorization: "Basic ".concat(apiKey),
+    };
+    return axios.post(APIService.Route.concat(url), data, { headers: auth });
+  }
 }

@@ -8,4 +8,7 @@ export default class LocalStorageService {
     var hashed = btoa(JSON.stringify(data));
     localStorage.setItem("etoolservice_user_data", hashed);
   }
+  static GetApiKey() {
+    return localStorage.getItem("etoolservice_api_key");
+  }
 }
