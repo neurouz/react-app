@@ -68,7 +68,14 @@ export default class Navbar extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <Link to="/products" className="nav-link" href="/">
+                <Link
+                  to={{
+                    pathname: "/products",
+                    auth: this.state.auth,
+                  }}
+                  className="nav-link"
+                  href="/"
+                >
                   Products
                 </Link>
               </li>

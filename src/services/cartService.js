@@ -1,5 +1,5 @@
 export default class CartService {
-  static AddToCart(item, quantity) {
+  static AddToCart(item, quantity, update = false) {
     let encrypted = btoa(JSON.stringify(item));
     var previous_quantity = sessionStorage.getItem(encrypted);
 
@@ -8,11 +8,27 @@ export default class CartService {
       sessionStorage.removeItem(encrypted);
       sessionStorage.setItem(
         encrypted,
-        Number.parseInt(previous_quantity, 10) + Number.parseInt(quantity, 10)
+        update
+          ? Number.parseInt(quantity, 10)
+          : Number.parseInt(previous_quantity, 10) +
+              Number.parseInt(quantity, 10)
       );
     } else {
       sessionStorage.setItem(encrypted, quantity);
     }
+  }
+
+  static RemoveFromCart(item) {
+    let encrypted = btoa(JSON.stringify(item));
+    var cartItem = sessionStorage.getItem(encrypted);
+
+    if (cartItem) {
+      sessionStorage.removeItem(encrypted);
+    }
+  }
+
+  static ClearCart() {
+    sessionStorage.clear();
   }
 
   static GetProductsFromCart() {

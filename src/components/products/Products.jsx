@@ -13,6 +13,7 @@ export default class Products extends Component {
     this.state = {
       data: [],
       isLoaded: false,
+      auth: props.location.auth,
     };
   }
 
@@ -26,7 +27,7 @@ export default class Products extends Component {
   }
 
   render() {
-    var { isLoaded, data } = this.state;
+    var { isLoaded, data, auth } = this.state;
     if (!isLoaded) {
       return <Loader></Loader>;
     } else {
@@ -39,6 +40,7 @@ export default class Products extends Component {
           <div className="products-all">
             {data.map((product) => (
               <Product
+                auth={auth}
                 id={product.id}
                 key={product.id}
                 product={product}

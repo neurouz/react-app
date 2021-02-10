@@ -11,6 +11,7 @@ export default class Product extends Component {
     super(props);
     this.state = {
       data: props.product,
+      auth: props.auth,
     };
   }
   handleClick = (id) => {
@@ -26,14 +27,16 @@ export default class Product extends Component {
             alt="product"
             height="200"
           />
-          <div
-            onClick={() => this.handleClick(this.props.id)}
-            id={this.props.id}
-            className="add-to-cart"
-          >
-            <i className="ion-android-add"></i>
-            <span>Add to Cart</span>
-          </div>
+          {this.state.auth && (
+            <div
+              onClick={() => this.handleClick(this.props.id)}
+              id={this.props.id}
+              className="add-to-cart"
+            >
+              <i className="ion-android-add"></i>
+              <span>Add to Cart</span>
+            </div>
+          )}
           <figcaption>
             <h3>{this.state.data.productName}</h3>
             <p>Dimensions: {this.state.data.description}</p>
