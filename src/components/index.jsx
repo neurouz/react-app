@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import Slider from "react-slick";
 import Product from "./products/Product";
+import IndexStatic from "./index/indexStatic";
 import APIService from "../services/apiService";
 import LocalStorageService from "../services/LocalStorageService";
-
-import Slider from "react-slick";
 
 import "../styles/indexPage.css";
 
@@ -61,25 +61,25 @@ export default class Index extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed: 5000,
       centerMode: true,
     };
 
     // If user is logged in, call API and show recommended products
     if (this.props.auth) {
       const products = this.state.products;
-      const loaded = this.state.productsLoaded;
+      if (!this.state.productsExisting) return <IndexStatic></IndexStatic>;
       return (
         <div className="index-content">
-          <section className="left"></section>
+          <section className="left">
+            <IndexStatic></IndexStatic>
+          </section>
           <div className="recommended-products">
             <h3 className="text-center font-weight-bold mt-4 mb-1">
-              {" "}
-              Recommended for you{" "}
+              Recommended for you
             </h3>
             <p className="text-center mb-2">
-              {" "}
-              We recommend products that you have previously serviced{" "}
+              We recommend products that you have previously serviced
             </p>
             <Slider {...settings}>
               {products.map((product) => (
@@ -97,6 +97,6 @@ export default class Index extends Component {
     }
 
     // If user is not logged in
-    return <div>Index page</div>;
+    return <IndexStatic></IndexStatic>;
   }
 }

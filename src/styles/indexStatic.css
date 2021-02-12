@@ -1,0 +1,41 @@
+.static-parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.index-row > p {
+  padding: 15px 5% 10px 10%;
+  color: darkslategrey;
+  font-weight: bold;
+  font-size: 20;
+  text-align: justify;
+}
+
+.index-row {
+  margin: 0;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.index-row > img {
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: img-animation 4s infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes img-animation {
+  0% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}

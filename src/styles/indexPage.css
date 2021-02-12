@@ -6,6 +6,18 @@
   margin-right: 50px;
   margin-top: 3%;
   box-shadow: inset 15px 3px 144px -6px rgba(255, 255, 255, 0.8);
+  animation-name: recommender-animation;
+  animation-duration: 0.5s;
+  transition: all 0.5s;
+}
+
+@keyframes recommender-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .index-content {
@@ -19,4 +31,24 @@
 
 .slick-list {
   height: 55vh !important;
+}
+
+@media (max-width: 1000px) {
+  .left {
+    width: 100%;
+  }
+  .index-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .recommended-products {
+    margin: 0;
+  }
+}
+
+@media (max-width: 455px) {
+  .recommended-products {
+    width: 100%;
+  }
 }
