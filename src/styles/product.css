@@ -110,6 +110,7 @@
 .product-card {
   animation-name: product-card-animation;
   animation-duration: 0.75s;
+  height: 500px;
 }
 
 @keyframes product-card-animation {

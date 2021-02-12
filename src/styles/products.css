@@ -1,8 +1,19 @@
 .products-all {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  justify-content: space-evenly;
+  justify-items: center;
   width: 99%;
+}
+
+@media (max-width: 991px) {
+  .products-all {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 670px) {
+  .products-all {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,5 +1,7 @@
 // Import styles
 import "./App.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Import custom components
 import Navbar from "./components/navbar";
@@ -7,6 +9,7 @@ import Products from "./components/products/Products";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register";
 import Cart from "./components/cart/cart";
+import Index from "./components/index";
 
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -30,10 +33,6 @@ class App extends Component {
   };
 
   render() {
-    // var message = "";
-    // if (this.state.authenticated === true || this.state.apiKey) {
-    //   message = "Hello, " + LocalStorageService.GetJsonData().username;
-    // }
     return (
       <Router>
         <div>
@@ -42,6 +41,10 @@ class App extends Component {
             auth={this.state.authenticated}
           />
           <Switch>
+            <Route
+              path="/index"
+              render={() => <Index auth={this.state.authenticated}></Index>}
+            ></Route>
             <Route path="/products" component={Products}></Route>
             <Route path="/register" component={Register}></Route>
             <Route

@@ -4,8 +4,8 @@
   width: 80px;
   height: 80px;
   color: black !important;
-  margin-left: 50%;
-  margin-top: 20%;
+  margin-left: calc(50vw - 5%);
+  margin-top: calc(50vh - 10%);
 }
 .lds-roller div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;

@@ -63,9 +63,15 @@ export default class Navbar extends Component {
           >
             <ul className="navbar-nav mr-auto navbar-list">
               <li className="nav-item active">
-                <a className="nav-link" href="/">
-                  Home <span className="sr-only">(current)</span>
-                </a>
+                <Link
+                  to={{
+                    pathname: "/index",
+                  }}
+                  className="nav-link"
+                  href="/"
+                >
+                  Home
+                </Link>
               </li>
               <li className="nav-item">
                 <Link

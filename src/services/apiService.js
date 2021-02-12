@@ -41,4 +41,17 @@ export default class APIService {
     };
     return axios.post(APIService.Route.concat(url), data, { headers: auth });
   }
+
+  static async GetWithAuthAsync(url, apiKey, query = null) {
+    var config = {
+      method: "GET",
+      url: APIService.Route.concat(url),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic ".concat(apiKey),
+      },
+    };
+
+    return axios(config);
+  }
 }
