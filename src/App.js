@@ -10,6 +10,7 @@ import Login from "./components/account/Login";
 import Register from "./components/account/Register";
 import Cart from "./components/cart/cart";
 import Index from "./components/index";
+import MyServices from "./components/myServices/myServices";
 
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -54,6 +55,12 @@ class App extends Component {
             <Route
               path="/cart"
               render={() => <Cart auth={this.state.authenticated}></Cart>}
+            ></Route>
+            <Route
+              path="/myservices"
+              render={() => (
+                <MyServices auth={this.state.authenticated}></MyServices>
+              )}
             ></Route>
           </Switch>
         </div>
