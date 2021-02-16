@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import APIService from "../../services/apiService";
 import LocalStorageService from "../../services/LocalStorageService";
-import { useLocation } from "react-router-dom";
 import Unauthorized from "../auth/unauthorized";
 import Service from "./service";
 
 export default function MyServices(props) {
   const [services, setServices] = useState([]);
-  const location = useLocation();
-  const [auth, setAuth] = useState(LocalStorageService.GetApiKey());
+  const [auth] = useState(LocalStorageService.GetApiKey());
 
   useEffect(() => {
     if (auth) {

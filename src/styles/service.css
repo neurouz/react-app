@@ -1,0 +1,24 @@
+.service-details {
+  transition: all 0.25s;
+}
+
+.service-title {
+  width: 250px;
+  overflow: hidden;
+}
+
+.service-type {
+  width: 150px;
+}
+
+.service-quantity {
+  width: 150px;
+}
+
+.service-created {
+  width: 250px;
+}
+
+.service-download {
+  margin-right: 25px;
+}
