@@ -1,0 +1,14 @@
+.filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.filters > input {
+  width: 150px;
+}
+
+.filters > select {
+  width: 25%;
+}

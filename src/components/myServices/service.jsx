@@ -1,10 +1,17 @@
 import React from "react";
+// Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+
+import APIService from "../../services/apiService";
+import LocalStorageService from "../../services/LocalStorageService";
+
 import "../../styles/service.css";
 
 export default function Service(props) {
-  console.log(props.item);
   let iconRotationAngle = 0;
 
   const toggleRotate = (element) => {
@@ -14,7 +21,7 @@ export default function Service(props) {
 
   const toggleDetails = (element) => {
     let height = element.style.height;
-    height = element.style.height === "0px" ? "150px" : "0px";
+    height = element.style.height === "0px" ? "180px" : "0px";
     element.style.height = height;
 
     let opacity = element.style.opacity;
@@ -29,12 +36,46 @@ export default function Service(props) {
     toggleDetails(details);
   };
 
+  const downloadAttachment = () => {
+    const route = `File/Download/Services/${props.item.attachment}`;
+    APIService.GetWithAuthAsync(route, LocalStorageService.GetApiKey())
+      .then((response) => {
+        console.log("here you are!");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="service-parent w-100 d-flex flex-column align-items-center mt-3">
+      <h4 className="service-title font-weight-bold text-center">
+        Tool name: {props.item.toolName}
+      </h4>
+      <div>
+        {(props.item.viewed && (
+          <FontAwesomeIcon
+            icon={faEye}
+            style={{ color: "darkgreen" }}
+            className="service-icon"
+          ></FontAwesomeIcon>
+        )) ||
+          (!props.item.viewed && (
+            <FontAwesomeIcon
+              icon={faEyeSlash}
+              style={{ color: "darkred" }}
+              className="service-icon"
+            ></FontAwesomeIcon>
+          ))}
+        {props.item.approved && (
+          <FontAwesomeIcon
+            icon={faCheckCircle}
+            style={{ color: "darkgreen" }}
+            className="service-icon"
+          ></FontAwesomeIcon>
+        )}
+      </div>
       <div className="service d-flex flex-row justify-content-center w-75 align-items-center">
-        <h4 className="service-title font-weight-bold">
-          {props.item.toolName}
-        </h4>
         <p className="service-type">{props.item.serviceType}</p>
         <p className="service-quantity">Quantity: {props.item.quantity}</p>
         <p className="service-created">
@@ -44,6 +85,7 @@ export default function Service(props) {
         <button
           disabled={!props.item.attachment}
           className="btn btn-success btn-sm service-download"
+          onClick={downloadAttachment}
         >
           Download attachment
         </button>
@@ -56,7 +98,7 @@ export default function Service(props) {
             icon={faChevronDown}
             style={{ color: "white", transition: "transform .25s" }}
           ></FontAwesomeIcon>
-          {"  "}
+          {"  "} Details
         </button>
       </div>
       <div
@@ -64,10 +106,21 @@ export default function Service(props) {
         className="text-center font-weight-bold service-details"
         style={{ height: "0px", opacity: "0" }}
       >
-        <p>Some text</p>
         <hr />
-        <br />
-        <p> Some text 2 </p>
+
+        <p>Responsed: {props.item.responsed ? "Yes" : "No"}</p>
+        {props.item.note && <p> Your note: {props.item.note} </p>}
+        {props.item.responsed && (
+          <div className="responsed-service">
+            <p>Approved: {props.item.approved ? "Yes" : "No"}</p>
+            <p>Response message: {props.item.explanation}</p>
+            <p>Service price: BAM {props.item.price}</p>
+            <p>
+              Finish date:{" "}
+              {new Date(props.item.finishDate).toLocaleDateString()}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

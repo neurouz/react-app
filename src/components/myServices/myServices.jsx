@@ -4,6 +4,8 @@ import LocalStorageService from "../../services/LocalStorageService";
 import Unauthorized from "../auth/unauthorized";
 import Service from "./service";
 
+import "../../styles/services.css";
+
 export default function MyServices(props) {
   const [services, setServices] = useState([]);
   const [auth] = useState(LocalStorageService.GetApiKey());
@@ -29,13 +31,26 @@ export default function MyServices(props) {
   }, [auth]);
 
   const filterServices = (e) => {
-    const search = e.target.value;
-    if (e.target.value) {
-      const array = copy.filter((service) =>
-        service.toolName.toLowerCase().includes(search.toLowerCase())
+    const select = Number.parseInt(
+      document.getElementById("select-filter").value
+    );
+    const input = document.getElementById("search-filter").value;
+
+    let array = [...copy];
+
+    if (input) {
+      array = array.filter((service) =>
+        service.toolName.toLowerCase().includes(input.toLowerCase())
       );
-      setServices([...array]);
-    } else setServices([...copy]);
+    }
+
+    if (select === 2) {
+      array = array.filter((x) => x.responsed === true);
+    } else if (select === 3) {
+      array = array.filter((x) => x.responsed === false);
+    }
+
+    setServices([...array]);
   };
 
   if (!auth) {
@@ -43,18 +58,31 @@ export default function MyServices(props) {
   }
   return (
     <div>
-      <div className="d-flex flex-column align-items-center justify-content-around w-50 m-auto">
+      <div className="d-flex flex-column align-items-center justify-content-around w-75 m-auto">
         <h2 className="text-center font-weight-bold mt-5"> My services </h2>
-        <input
-          onChange={filterServices}
-          className="form-control align-self-start w-25"
-          type="text"
-          name="service-search"
-          placeholder="Search services .."
-          style={{ width: "150px" }}
-        />
+        <div className="filters">
+          <input
+            id="search-filter"
+            onChange={filterServices}
+            className="form-control align-self-start w-25"
+            type="text"
+            name="service-search"
+            placeholder="Search services .."
+            style={{ width: "30%" }}
+          />
+          <select
+            id="select-filter"
+            name="filter"
+            className="form-control"
+            onChange={filterServices}
+          >
+            <option value={1}>Show all</option>
+            <option value={2}>Only responsed</option>
+            <option value={3}>Not responsed</option>
+          </select>
+        </div>
       </div>
-      <hr style={{ width: "50%" }} /> <br />
+      <hr style={{ width: "75%" }} /> <br />
       {services.map((service) => (
         <Service key={service.id} item={service}></Service>
       ))}

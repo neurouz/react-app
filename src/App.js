@@ -2,7 +2,6 @@
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 // Import custom components
 import Navbar from "./components/navbar";
 import Products from "./components/products/Products";

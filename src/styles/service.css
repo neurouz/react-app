@@ -3,7 +3,7 @@
 }
 
 .service-title {
-  width: 250px;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -21,4 +21,31 @@
 
 .service-download {
   margin-right: 25px;
+}
+
+.service-parent {
+  padding-top: 15px;
+  margin: auto;
+  width: 65% !important;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.service-parent:hover {
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+.service {
+  padding: 10px 0 10px 0;
+  width: 100% !important;
+}
+
+.service-icon {
+  margin-right: 10px;
+}
+
+.service-details p {
+  margin: 0 !important;
+  text-align: center;
 }
