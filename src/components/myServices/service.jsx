@@ -56,7 +56,7 @@ export default function Service(props) {
             icon={faChevronDown}
             style={{ color: "white", transition: "transform .25s" }}
           ></FontAwesomeIcon>
-          {"  "}Details
+          {"  "}
         </button>
       </div>
       <div
