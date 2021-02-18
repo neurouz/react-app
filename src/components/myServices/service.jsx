@@ -38,9 +38,17 @@ export default function Service(props) {
 
   const downloadAttachment = () => {
     const route = `File/Download/Services/${props.item.attachment}`;
-    APIService.GetWithAuthAsync(route, LocalStorageService.GetApiKey())
-      .then((response) => {
-        console.log("here you are!");
+    APIService.DownloadAsync(route, LocalStorageService.GetApiKey())
+      .then((result) => {
+        if (result.status === 200) {
+          console.log(result);
+          var url = window.URL || window.webkitURL;
+          const link = url.createObjectURL(new Blob([result.data]));
+          var a = document.createElement("a");
+          a.setAttribute("download", props.item.attachment);
+          a.setAttribute("href", link);
+          a.click();
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -76,30 +84,35 @@ export default function Service(props) {
         )}
       </div>
       <div className="service d-flex flex-row justify-content-center w-75 align-items-center">
-        <p className="service-type">{props.item.serviceType}</p>
-        <p className="service-quantity">Quantity: {props.item.quantity}</p>
-        <p className="service-created">
-          Service created:{" "}
-          {new Date(props.item.dateCreated).toLocaleDateString()}
-        </p>
-        <button
-          disabled={!props.item.attachment}
-          className="btn btn-success btn-sm service-download"
-          onClick={downloadAttachment}
-        >
-          Download attachment
-        </button>
-        <button
-          className="btn btn-info btn-sm service-details"
-          onClick={(e) => showDetails(e, props.item.id)}
-        >
-          <FontAwesomeIcon
-            id={`icon-${props.item.id}`}
-            icon={faChevronDown}
-            style={{ color: "white", transition: "transform .25s" }}
-          ></FontAwesomeIcon>
-          {"  "} Details
-        </button>
+        <div className="service-card-info d-flex flex-row justify-content-center">
+          <p className="service-type">{props.item.serviceType}</p>
+          <p className="service-quantity">Quantity: {props.item.quantity}</p>
+          <p className="service-created">
+            Service created:{" "}
+            {new Date(props.item.dateCreated).toLocaleDateString()}
+          </p>
+        </div>
+
+        <div className="service-buttons">
+          <button
+            disabled={!props.item.attachment}
+            className="btn btn-success btn-sm service-download"
+            onClick={downloadAttachment}
+          >
+            Download attachment
+          </button>
+          <button
+            className="btn btn-info btn-sm service-details"
+            onClick={(e) => showDetails(e, props.item.id)}
+          >
+            <FontAwesomeIcon
+              id={`icon-${props.item.id}`}
+              icon={faChevronDown}
+              style={{ color: "white", transition: "transform .25s" }}
+            ></FontAwesomeIcon>
+            {"  "} Details
+          </button>
+        </div>
       </div>
       <div
         id={`details-${props.item.id}`}

@@ -12,3 +12,25 @@
 .filters > select {
   width: 25%;
 }
+
+.no-data-img {
+  width: 50vh;
+  margin: auto;
+  transition: all 0.45s;
+}
+
+.no-data {
+  transition: all 0.45s;
+  animation: load-animation 0.75s;
+}
+
+@keyframes load-animation {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

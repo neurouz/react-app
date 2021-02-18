@@ -54,4 +54,18 @@ export default class APIService {
 
     return axios(config);
   }
+
+  static async DownloadAsync(url, apiKey) {
+    var config = {
+      method: "GET",
+      url: APIService.Route.concat(url),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic ".concat(apiKey),
+      },
+      responseType: "arraybuffer",
+    };
+
+    return axios(config);
+  }
 }

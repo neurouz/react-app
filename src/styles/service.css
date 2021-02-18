@@ -30,6 +30,7 @@
   border: 2px solid rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   transition: all 0.2s;
+  animation: load-animation 0.75s;
 }
 
 .service-parent:hover {
@@ -41,6 +42,10 @@
   width: 100% !important;
 }
 
+.service p {
+  margin: 0 !important;
+}
+
 .service-icon {
   margin-right: 10px;
 }
@@ -48,4 +53,41 @@
 .service-details p {
   margin: 0 !important;
   text-align: center;
+}
+
+.service-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media (max-width: 1300px) {
+  .service-parent {
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 950px) {
+  .service {
+    flex-direction: column !important;
+  }
+  .service-buttons {
+    margin-top: 15px;
+  }
+  #search-filter {
+    width: 45% !important;
+  }
+  #select-filter {
+    width: 45% !important;
+  }
+}
+
+@media (max-width: 645px) {
+  .service-card-info {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .service-card-info p {
+    width: 100%;
+  }
 }

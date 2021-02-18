@@ -6,10 +6,13 @@ import Service from "./service";
 
 import "../../styles/services.css";
 
+import NoDataSVG from "../../images/no_data.svg";
+
 export default function MyServices(props) {
   const [services, setServices] = useState([]);
   const [auth] = useState(LocalStorageService.GetApiKey());
   const [copy, setCopy] = useState([]);
+  let delay = -0.05;
 
   useEffect(() => {
     if (auth) {
@@ -83,9 +86,20 @@ export default function MyServices(props) {
         </div>
       </div>
       <hr style={{ width: "75%" }} /> <br />
-      {services.map((service) => (
-        <Service key={service.id} item={service}></Service>
-      ))}
+      {services.length > 0 ? (
+        services.map((service) => (
+          <Service key={service.id} item={service}></Service>
+        ))
+      ) : (
+        <div className="d-flex flex-column no-data">
+          <img src={NoDataSVG} alt="No data" className="no-data-img"></img>
+          <h5 className="text-center font-weight-bold">
+            There are currently no services to display.
+          </h5>
+        </div>
+      )}
+      <br />
+      <br />
     </div>
   );
 }
