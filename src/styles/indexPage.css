@@ -7,17 +7,8 @@
   margin-top: 3%;
   box-shadow: inset 15px 3px 144px -6px rgba(255, 255, 255, 0.8);
   animation-name: recommender-animation;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   transition: all 0.5s;
-}
-
-@keyframes recommender-animation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .index-content {
@@ -27,6 +18,17 @@
 }
 .left {
   width: calc(100% - 400px);
+}
+
+@keyframes recommender-animation {
+  0% {
+    transform: translateY(-400px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
 
 .slick-list {

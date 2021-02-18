@@ -65,6 +65,7 @@ export default function Register() {
         <p className="font-weight-bold"> Company details </p>
 
         <Input
+          autofocus={true}
           iconClass="fa fa-building"
           name="companyName"
           placeholder="Company name"

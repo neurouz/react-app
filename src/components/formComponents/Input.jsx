@@ -10,6 +10,7 @@ export default function Input(props) {
         </span>
       </div>
       <input
+        autoFocus={props.autofocus}
         name={props.name}
         className="form-control"
         placeholder={props.placeholder}

@@ -1,11 +1,15 @@
 import "../styles/navbar.css";
 import "bootstrap/dist/css/bootstrap.css";
 import logo from "../images/tool-logo.png";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import React, { Component } from "react";
 
-export default class Navbar extends Component {
+// Other scripts
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
+
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,9 +25,11 @@ export default class Navbar extends Component {
       auth: false,
     });
     this.props.Authenticate(false, null);
+    toastr.info("Successfuly logged out", "Info");
+    this.props.history.push("/");
   };
 
-  handleLogin = (e) => {
+  handleLogin = () => {
     var api_key = localStorage.getItem("etoolservice_api_key");
     if (api_key) {
       this.setState({
@@ -65,7 +71,7 @@ export default class Navbar extends Component {
               <li className="nav-item active">
                 <Link
                   to={{
-                    pathname: "/index",
+                    pathname: "/",
                   }}
                   className="nav-link"
                   href="/"
@@ -163,3 +169,5 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export default withRouter(Navbar);

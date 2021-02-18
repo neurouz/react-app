@@ -13,6 +13,7 @@ import "../../styles/service.css";
 
 export default function Service(props) {
   let iconRotationAngle = 0;
+  const viewedMessage = props.item.viewed ? "Viewed" : "Not viewed";
 
   const toggleRotate = (element) => {
     iconRotationAngle = iconRotationAngle === 0 ? 90 : 0;
@@ -58,9 +59,9 @@ export default function Service(props) {
   return (
     <div className="service-parent w-100 d-flex flex-column align-items-center mt-3">
       <h4 className="service-title font-weight-bold text-center">
-        Tool name: {props.item.toolName}
+        {props.item.toolName}
       </h4>
-      <div>
+      <div className="d-flex flex-row align-items-center">
         {(props.item.viewed && (
           <FontAwesomeIcon
             icon={faEye}
@@ -75,12 +76,19 @@ export default function Service(props) {
               className="service-icon"
             ></FontAwesomeIcon>
           ))}
+        <span className="viewed-tooltip font-weight-bold">
+          {" "}
+          {viewedMessage}{" "}
+        </span>
         {props.item.approved && (
-          <FontAwesomeIcon
-            icon={faCheckCircle}
-            style={{ color: "darkgreen" }}
-            className="service-icon"
-          ></FontAwesomeIcon>
+          <div className="ml-2">
+            <FontAwesomeIcon
+              icon={faCheckCircle}
+              style={{ color: "darkgreen" }}
+              className="service-icon"
+            ></FontAwesomeIcon>
+            <span className="approved-tooltip font-weight-bold">Approved</span>
+          </div>
         )}
       </div>
       <div className="service d-flex flex-row justify-content-center w-75 align-items-center">

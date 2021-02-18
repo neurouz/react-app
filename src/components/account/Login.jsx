@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import APIService from "../../services/apiService";
 import LocalStorageService from "../../services/LocalStorageService";
 import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router";
 
 // Other scripts
 import toastr from "toastr";
@@ -15,6 +16,7 @@ import "../../styles/loginForm.css";
 export default function Login(props) {
   const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
   const location = useLocation();
+  const history = useHistory();
 
   const loginSubmit = async (data) => {
     try {
@@ -30,6 +32,7 @@ export default function Login(props) {
         localStorage.setItem("etoolservice_api_key", apiKey);
         location.auth();
         toastr.success("Login sucessful", "Info");
+        history.push("/");
       } else {
         toastr.error("Username or password are incorrect", "Error");
       }
@@ -48,6 +51,7 @@ export default function Login(props) {
         <h4 className="modal-title">Login to Your Account</h4>
         <div className="form-group">
           <Input
+            autofocus={true}
             iconClass="fa fa-user"
             name="username"
             placeholder="Your username"
