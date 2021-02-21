@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../../styles/indexStatic.css";
 import ToolGrinding from "../../images/tool-grinding.jpg";
 import Customer from "../../images/customer.jpg";
+import { Link } from "react-router-dom";
+import LocalStorageService from "../../services/LocalStorageService";
 
 export default function IndexStatic() {
+  const [auth] = useState(LocalStorageService.GetApiKey());
   return (
     <div className="index-static">
       <h1 className="text-center font-weight-bold text-primary">
@@ -41,13 +44,15 @@ export default function IndexStatic() {
           </p>
         </div>
       </div>
-      <div className="static-parent">
-        <div className="index-row">
-          <button className="btn btn-outline-primary btn-lg">
-            Become a member now!
-          </button>
+      {!auth && (
+        <div className="static-parent">
+          <div className="index-row">
+            <Link to="/register" className="btn btn-outline-primary btn-lg">
+              Become a member now!
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

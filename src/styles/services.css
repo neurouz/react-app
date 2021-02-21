@@ -34,3 +34,31 @@
     opacity: 1;
   }
 }
+
+.new-service-request {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1;
+  transition: all 0.5s;
+}
+
+.my-tooltip {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  transition: all 0.4s;
+  opacity: 0;
+  font-size: small;
+}
+
+.new-service-request:hover .my-tooltip {
+  opacity: 1;
+}
+
+.viewed-tooltip,
+.approved-tooltip {
+  display: inline;
+}

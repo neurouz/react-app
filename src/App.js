@@ -42,7 +42,8 @@ class App extends Component {
           />
           <Switch>
             <Route
-              path="/index"
+              exact
+              path="/"
               render={() => <Index auth={this.state.authenticated}></Index>}
             ></Route>
             <Route path="/products" component={Products}></Route>

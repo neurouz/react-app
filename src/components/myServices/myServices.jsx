@@ -3,6 +3,9 @@ import APIService from "../../services/apiService";
 import LocalStorageService from "../../services/LocalStorageService";
 import Unauthorized from "../auth/unauthorized";
 import Service from "./service";
+import Loader from "../global/Loader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import "../../styles/services.css";
 
@@ -12,7 +15,7 @@ export default function MyServices(props) {
   const [services, setServices] = useState([]);
   const [auth] = useState(LocalStorageService.GetApiKey());
   const [copy, setCopy] = useState([]);
-  let delay = -0.05;
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (auth) {
@@ -25,6 +28,7 @@ export default function MyServices(props) {
           if (res.status === 200) {
             setServices([...res.data]);
             setCopy([...res.data]);
+            setLoaded(true);
           }
         })
         .catch((err) => {
@@ -59,9 +63,23 @@ export default function MyServices(props) {
   if (!auth) {
     return <Unauthorized></Unauthorized>;
   }
+  if (!loaded) {
+    return <Loader></Loader>;
+  }
   return (
     <div>
-      <div className="d-flex flex-column align-items-center justify-content-around w-75 m-auto">
+      <div className="new-service-request">
+        <button className="btn btn-info">
+          <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>
+          {"  "}
+          <span className="btn-text"></span>
+        </button>
+        <span className="font-weight-bold my-tooltip">
+          {" "}
+          Add service request{" "}
+        </span>
+      </div>
+      <div className="d-flex flex-column align-items-center justify-content-around w-75 m-auto custom-header">
         <h2 className="text-center font-weight-bold mt-5"> My services </h2>
         <div className="filters">
           <input
@@ -80,8 +98,8 @@ export default function MyServices(props) {
             onChange={filterServices}
           >
             <option value={1}>Show all</option>
-            <option value={2}>Only responsed</option>
-            <option value={3}>Not responsed</option>
+            <option value={2}>Responsed</option>
+            <option value={3}>Unresponsed</option>
           </select>
         </div>
       </div>
